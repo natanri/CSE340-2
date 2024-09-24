@@ -1,7 +1,21 @@
+--Task # 1
+INSERT INTO account
+(account_firstname, account_lastname, account_email, account_password )
+VALUES
+('Tony', 'Stark', 'tony@stark.com', 'Iam1ronM@n');
+
+--Task #2
+UPDATE account
+SET account_type = 'Admin'
+WHERE account_firstname = 'Tony';
+
+--Task #3
+DELETE FROM account
+WHERE account_firstname = 'Tony';
+
 --Task#4
 UPDATE inventory
 SET inv_description = REPLACE (inv_description, 'small interior', 'a huge interior');
-
 
 --Task#5
 SELECT 
