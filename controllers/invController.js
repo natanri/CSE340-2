@@ -25,7 +25,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildByInventoryDetail = async function(req, res, next) {
     const  invId = req.params.inv_id
     const data = await invModel.getInventoryById(invId)
-    console.log(data)
+    //console.log(data)
     const grid = await utilities.buildInventoryDetailGrid(data)
     let nav = await utilities.getNav()
     const className = data[0].inv_model
