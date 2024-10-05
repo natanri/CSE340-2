@@ -14,6 +14,7 @@ const inventoryRoute = require('./routes/inventoryRoute')
 const baseController = require("./controllers/baseController")
 const utilities = require('./utilities')
 
+
 /* *************************
  * View Engine and Templates
  ***************************/
@@ -26,7 +27,7 @@ const utilities = require('./utilities')
  *************************/
 app.use(static)
 //Index route
-app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 
 //Inventory routes
 app.use("/inv", inventoryRoute)
@@ -40,15 +41,34 @@ app.use(async(req, res, next) =>{
  * Express Error handler
  * Place after alll other middleware
  ****************************** */
-app.use(async(err, req, res, next) => {
+
+app.use(async(err, req, res, next) =>{
   let nav = await utilities.getNav()
+  //Determinethe status and message
+  let status = err.status || 500
+  let message
+
+  //Custom message for 404 errors
+  if(status === 404){
+    message = err.message || "Page not Found."
+
+  //Custom message for 500 errors or others
+  } else if (status === 500){
+    message = "Oh no! There was a crash. Maybe try a different route?"
+  }
+
+  //Log error details(optional but useful for debugging)
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
-  res.render("errors/error", {
-    title: err.status || "Server Error",
-    message: err.message,
+
+  //Render error with different messages and status codes
+  res.status(status).render("errors/error", {
+    title: status === 404 ? "404 - not Found" : "500 - Server Error",
+    message,
     nav,
   })
 })
+
+
 
 
 /* ***********************

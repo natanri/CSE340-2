@@ -1,9 +1,15 @@
-<% if (title) { %>
-    <h1><%= title %></h1>
-    <% } else {
-        res.redirect('/')
-    } %>
+<h1><%= title %></h1>
+<p><%= message %></p>
+
+<% if (title.includes("404")) { %>
+    <img class="doh" src="../../images/site/error-404-foxplay.webp" alt="404 image">
+<% } else if (title.includes("500")){ %>
+    <img class="burn" src="../../images/site/dribbble-500-animated.gif" alt="500 image">    
+<% } %>
+<footer>
+    <a id="GH" href="/">Go Home</a>
+</footer>
+
     
-    <!--A message Block-->
-    <%- message %>
+
     

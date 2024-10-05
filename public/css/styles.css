@@ -16,8 +16,7 @@
     justify-content: center;
     background-image: url('/images/site/small_check.jpg');
     padding: 10px;
-    height: 105vh;
-       
+    min-height: 250px;       
   }  
   
   #wrapper{       
@@ -216,9 +215,134 @@
   .boxes-upgrades a:hover {
     color: #007BFF;
   }
+
+/********Main inv display*******/
+#inv-display{
+  display: flex;
+  flex-wrap: wrap;  
+  flex-direction: row; 
+  list-style-type: none; 
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0;  
+  }
+
+  #inv-display li img{
+    width: 100%;
+    margin-top: 0px;   
+    border-radius: 10px;
+  }
+
+  #inv-display li{
+    border: solid grey 1px;
+    width: 165px;
+    height: 250px;
+    border-radius: 10px; 
+    margin: 10px;  
+    text-align: center;
+    box-shadow: 10px 10px 5px grey;  
+  } 
+
+  #inv-display .namePrice{
+    padding: 0;
+  }
+
+  #inv-display li a{
+    font-size: 1rem;
+    color: rgb(53, 53, 53);
+    text-decoration: none;    
+  }
+
+  /***********Inv-detail-grid***************/
+  .inv-detail-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;    
+  }
+
+  .inv-detail-grid h1{
+    grid-column: 1 / -1;
+  }
+
+  .inv-detail-grid h2{
+    margin-top: 0;
+  }
+
+  .inv-detail-grid a{
+    grid-column: 1 / 3;
+    grid-row: 2;
+  }
+
+  .inv-detail-grid img{
+    width: 100%;
+    padding: 10px;
+  }
+
+  .inv-display-grid .info{
+    grid-column: 3;
+    grid-row: 2;
+    padding-left: 50px;
+  }
+
+  .info h4 {
+    margin: 1px; 
+    display: flex;  
+  }
+
+  /***********Errors**************/
+  .doh{
+    width: 100%;
+  }
+
+  .burn{
+    width: 100%;
+  }
+/*********Footer***************/
   footer{
     padding-top: 10px;
-    margin-top: 10px;
+    margin-top: 10px;    
+  }
+
+  footer a{
+    font-size: 1.5rem;
+    color: rgb(53, 53, 53);
+    text-decoration: none;    
+  }
+
+  footer #GH{
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border: 1px solid #000;
+    color: #000;
+    background: transparent;
+    z-index: 0;
+  }
+
+  #GH:hover:after{
+    top: 0;
+    left: 0;
+  }
+
+  #GH:after{
+    content: "";
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 5px;
+    left: 5px;
+    transition: 0.2s;
+    background-color: #3d348b;
+  }
+  footer .copyright{
+    margin-bottom: 0;
   }
 }
 
@@ -227,17 +351,18 @@
   display: flex;
   justify-content: center;
   background-image: url('/images/site/small_check.jpg');    
-  padding: 10px;    
+  padding: 10px;
+  min-height: 100vh;    
   }
 
   #wrapper{       
     background-color: rgb(253, 253, 253);
-    width: 80%;
+    width: 80%;    
     padding: 10px;
     border: solid 3px;
     border-color: rgb(8, 140, 216);
     border-radius: 15px;
-    height: 150vh;
+    
   }
 
   .box-body{
@@ -251,7 +376,7 @@
     font-weight: 600;
   }
 
-  h2, p, li, a{
+  h2, p, li, a, h4{
     font-family: "SUSE", sans-serif;
     font-size: 1.5rem;
   }
@@ -297,7 +422,7 @@
     color: aliceblue; 
     text-decoration: none;
   }
-
+/*********Main home***********/
   .box-body{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;  
@@ -422,9 +547,124 @@
     color: #007BFF;
   }
 
+/********Main inv display*******/
+  #inv-display{
+    display: flex;
+    flex-wrap: wrap;  
+    flex-direction: row; 
+    list-style-type: none; 
+    align-items: center;
+    justify-content: space-evenly;
+  }
+
+  #inv-display li img{
+    width: 100%;
+    margin-top: 0px;   
+    border-radius: 10px;
+  }
+
+  #inv-display li{
+    border: solid grey 1px;
+    width: 250px;
+    height: 350px;
+    border-radius: 10px; 
+    margin: 10px;  
+    text-align: center;
+    box-shadow: 10px 10px 5px grey;
+
+  } 
+
+  #inv-display .namePrice{
+    padding: 0;
+  }
+
+  #inv-display li a{
+    font-size: 1.3rem;
+    color: rgb(53, 53, 53);
+    text-decoration: none;    
+  }
+
+/***********Inv-detail-grid***************/
+  .inv-detail-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;    
+  }
+
+  .inv-detail-grid h1{
+    grid-column: 1 / -1;
+  }
+
+  .inv-detail-grid a{
+    grid-column: 1 / 3;
+    grid-row: 2;
+  }
+
+  .inv-display-grid .info{
+    grid-column: 2;
+    grid-row: 2;
+    padding-left: 50px;
+  }
+
+  .info h4 {
+    margin: 1px; 
+    display: flex;  
+  }
+
+/***********Errors**************/
+.doh{
+  width: 100%;
+}
+
+.burn{
+  width: 100%;
+}
+/*********Footer***************/
   footer{
     padding-top: 10px;
-    margin-top: 10px;
+    margin-top: 10px;    
+  }
+
+  footer a{
+    font-size: 1.5rem;
+    color: rgb(53, 53, 53);
+    text-decoration: none;    
+  }
+
+  footer #GH{
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border: 1px solid #000;
+    color: #000;
+    background: transparent;
+    z-index: 0;
+  }
+
+  #GH:hover:after{
+    top: 0;
+    left: 0;
+  }
+
+  #GH:after{
+    content: "";
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 5px;
+    left: 5px;
+    transition: 0.2s;
+    background-color: #3d348b;
+  }
+  footer .copyright{
+    margin-bottom: 0;
   }
 }
 
@@ -474,13 +714,13 @@
   
     nav ul{
       display: flex; 
-      justify-content: space-around;
-      padding: 0;
+      justify-content: space-between; 
+      padding: 0;     
     }
   
     nav li{
       list-style: none;    
-      font-size: 1.5rem;
+      font-size: 1.3rem;
     }
   
     nav a{
@@ -586,6 +826,114 @@
     .boxes-upgrades a:hover {
       color: #007BFF;
     }
+/********Main inv display*******/
+    #inv-display{
+      display: flex;
+      flex-wrap: nowrap;  
+      flex-direction: column; 
+      list-style-type: none; 
+      align-items: center;      
+      padding: 0;
+    }
+
+    #inv-display li img{
+      width: 100%;
+      margin-top: 0px;   
+      border-radius: 10px;
+    }
+
+    #inv-display li{
+      border: solid grey 1px;
+      width: 250px;
+      height: 310px;
+      border-radius: 10px; 
+      margin: 10px;  
+      text-align: center;
+      box-shadow: 10px 10px 5px grey;    
+    } 
+
+    #inv-display .namePrice{
+      padding: 0;
+    }
+
+    #inv-display li a{
+      font-size: 1.3rem;
+      color: rgb(53, 53, 53);
+      text-decoration: none;      
+    }
+
+     /***********Inv-detail-grid***************/
+    .inv-detail-grid{
+      display: flex;
+      flex-direction: column;         
+    }
+
+    .inv-detail-grid img{
+      width: 100%;
+      padding: 10px;
+    }
+
+    .inv-display-grid .info{      
+      padding-left: 50px;
+    }
+
+/***********Footer*****************/
+   /***********Errors**************/
+.doh{
+  width: 100%;
+}
+
+.burn{
+  width: 100%;
+}
+/*********Footer***************/
+  footer{
+    padding-top: 10px;
+    margin-top: 10px;    
+  }
+
+  footer a{
+    font-size: 1.5rem;
+    color: rgb(53, 53, 53);
+    text-decoration: none;    
+  }
+
+  footer #GH{
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    outline: none;
+    border: 1px solid #000;
+    color: #000;
+    background: transparent;
+    z-index: 0;
+  }
+
+  #GH:hover:after{
+    top: 0;
+    left: 0;
+  }
+
+  #GH:after{
+    content: "";
+    width: 100%;
+    z-index: -1;
+    position: absolute;
+    height: 100%;
+    top: 5px;
+    left: 5px;
+    transition: 0.2s;
+    background-color: #3d348b;
+  }
+  footer .copyright{
+    margin-bottom: 0;
+  }
 }
 
 
