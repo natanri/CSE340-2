@@ -30,6 +30,13 @@ app.use(session({
   name: 'sessionId',
 }))
 
+//Express Messages Middelware
+app.use(require('connect-flash')())
+app.use(function(req, res, next){
+  res.locals.messages = require('express-messages')(req, res)
+  next()
+})
+
 /* *************************
  * View Engine and Templates
  ***************************/
@@ -41,11 +48,14 @@ app.use(session({
  * Routes
  *************************/
 app.use(static)
-//Index route
+//Index route - unit 3, activity
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
-//Inventory routes
+//Inventory routes - unit e, activity
 app.use("/inv", inventoryRoute)
+
+//Account routes - Unit - 4,activity
+app.use("/account", require("./routes/accountRoute"))
 
 //File Not Found Route - must be last route in list
 app.use(async(req, res, next) =>{
@@ -88,11 +98,11 @@ app.use(async(err, req, res, next) =>{
  * Values from .env (environment) file
  *************************/
 const port = process.env.PORT || 5500
-const host = '0.0.0.0'
+const host = process.env.HOST
 
 /* ***********************
  * Log statement to confirm server operation
  *************************/
-app.listen(port, host, () => {
+app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
