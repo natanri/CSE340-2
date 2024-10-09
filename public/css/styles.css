@@ -16,7 +16,8 @@
     justify-content: center;
     background-image: url('/images/site/small_check.jpg');
     padding: 10px;
-    min-height: 250px;       
+    height: 105vh;
+       
   }  
   
   #wrapper{       
@@ -76,19 +77,14 @@
   }
 
   nav li{
-    list-style: none;    
-    font-size: 1.5rem;
-  }
-
-  nav a{
+    list-style: none;
     color: aliceblue; 
-    text-decoration: none;
+    font-size: 1.5rem;
   }
 
   .box-body{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 5px;
   }
 
   .box-body h1{
@@ -137,13 +133,13 @@
 
   #img-delorean{
     grid-column: 1 / -1;
-    width: 83%;
+    width: 85%;
     height: 100%;
     margin-left: 80px;    
   }
 
   .middle-body{
-    grid-column: 4;
+    grid-column:  5;
     grid-row: 3;
     width: 100%;
   }
@@ -156,11 +152,10 @@
 
   .middle-body h2{
     margin-top: 10px;
-    font-size: 1.2rem;
   }
 
   .bottom-body{
-    grid-column: 1 /  4;
+    grid-column: 1 / span / 4;
     grid-row: 3;
     text-align: center;  
     width: 100%;  
@@ -170,13 +165,12 @@
     text-align: start;
     margin-top: 10px;
     margin-bottom: 10px;
-    font-size: 1.2rem;
   }
 
   .boxes-upgrades{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap:10px;
+    gap:20px;
     justify-content: center;
     padding: 0;    
   }
@@ -362,7 +356,7 @@
     border: solid 3px;
     border-color: rgb(8, 140, 216);
     border-radius: 15px;
-    
+    height: 150vh;
   }
 
   .box-body{
@@ -414,7 +408,8 @@
   }
 
   nav li{
-    list-style: none;    
+    list-style: none;
+    color: aliceblue; 
     font-size: 1.5rem;
   }
 
@@ -422,7 +417,7 @@
     color: aliceblue; 
     text-decoration: none;
   }
-/*********Main home***********/
+
   .box-body{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;  
@@ -720,12 +715,7 @@
   
     nav li{
       list-style: none;    
-      font-size: 1.3rem;
-    }
-  
-    nav a{
-      color: aliceblue; 
-      text-decoration: none;
+      font-size: 1.5rem;
     }
     /***********Body***********/
     .top-body{    

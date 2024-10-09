@@ -37,6 +37,7 @@ app.use(function(req, res, next){
   next()
 })
 
+
 /* *************************
  * View Engine and Templates
  ***************************/
@@ -48,6 +49,7 @@ app.use(function(req, res, next){
  * Routes
  *************************/
 app.use(static)
+
 //Index route - unit 3, activity
 app.get("/", utilities.handleErrors(baseController.buildHome))
 
@@ -92,6 +94,13 @@ app.use(async(err, req, res, next) =>{
     nav,
   })
 })
+
+
+//Index route
+app.get('/', function(req, res){
+  res.render('index',{title: "Home"})
+})
+
 
 /* ***********************
  * Local Server Information
