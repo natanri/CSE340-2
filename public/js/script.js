@@ -4,5 +4,9 @@ pswdBtn.addEventListener('click', function(){
     const type = pswdInput.getAttribute('type')
     if (type === 'password') {
         pswdInput.setAttribute('type','text')
-        pswdBtn.innerHTML =  ''
+        pswdBtn.innerHTML =  'Hide Password'
+    }else {
+        pswdInput.setAttribute('type','password')
+        pswdBtn.innerHTML = 'Show Password'
+    }
 })
