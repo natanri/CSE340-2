@@ -1,0 +1,22 @@
+<div>
+    <h1><%- title %></h1>
+    <% if(errors) { %>
+    <ul class="notice"> 
+    <% errors.array().forEach(error => { %>
+        <li><i><%= error.msg %></i></li>
+        <% }) %>
+    </ul>
+    <% } %>
+</div>
+<div class="addClassification">
+    <form action="/inv/add-classification" method="post" id="addclassification">
+        <p><i>Field is required.</i></p>
+        <fieldset>
+            <label for="classification_name">Classification Name</label><br>
+            <input type="text" name="classification_name" class="field" placeholder="Enter Calssification Name..." value="<%= locals.classification_name || '' %>" pattern="[A-Za-z]{3,}"><br>
+            <p class="center-content">
+                <button type="submit" id="add-classification">Add Classification</button>
+            </p>            
+        </fieldset>
+    </form>    
+</div>

@@ -15,6 +15,7 @@ const baseController = require("./controllers/baseController")
 const utilities = require('./utilities')
 const session = require("express-session")
 const pool = require('./database')
+const bodyParser = require("body-parser")
 
 /***********************************
  * Middleware
@@ -29,6 +30,10 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
+
+app.use(bodyParser.json())
+//for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true}))
 
 //Express Messages Middelware
 app.use(require('connect-flash')())
@@ -52,6 +57,11 @@ app.use(static)
 
 //Index route - unit 3, activity
 app.get("/", utilities.handleErrors(baseController.buildHome))
+
+//Redirect to inv
+app.get("/inv", (req, res) => {
+  res.redirect("/inv/management")
+})
 
 //Inventory routes - unit e, activity
 app.use("/inv", inventoryRoute)

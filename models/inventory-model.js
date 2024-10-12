@@ -1,3 +1,4 @@
+const { Result } = require("express-validator")
 const pool = require("../database/")
 
 /**********************************
@@ -36,4 +37,76 @@ async function getInventoryById(inv_id) {
     }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryById}
+/******************************************
+ * Add new classification
+ ******************************************/
+async function addClassification(classification_name) {
+    try{
+        const sql = 'INSERT INTO classification (classification_name) VALUES ($1) RETURNING classification_id';
+        return await pool.query(sql, [classification_name])
+    }catch(error){
+        console.error("addClassification error:" + error.message)
+        return error.message
+    }    
+}
+
+async function checkExistingClassification (clasification_name){
+    try{
+        const sql = `SELECT * FROM classification WHERE classification_name = $1`
+        const clasification = await pool.query(sql,[clasification_name])
+        if(clasification.rowCount === 1){
+            return clasification.rows[0]
+        }
+        return null
+    }catch(error){
+        return error.message
+    }
+}
+
+/**************************************
+ * Add new inventory item
+ ***************************************/
+async function addInventoryItem(
+    inv_make,
+    inv_model,
+    inv_year,
+    inv_price,
+    inv_description,
+    inv_image,
+    inv_thumbnail, 
+    inv_miles,
+    inv_color,
+    classification_id
+){
+    try{
+        const sql = `
+            INSERT INTO inventory
+            (inv_make, inv_model, inv_year, inv_price, inv_description, inv_image, inv_thumbnail, inv_miles, inv_color, classification_id)
+            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            RETURNING *;
+        `
+        const result=  await pool.query(sql,[
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_price,
+            inv_description,
+            inv_image,
+            inv_thumbnail,
+            inv_miles,
+            inv_color,
+            classification_id
+        ])
+        return result.rows[0]
+    }catch (error){
+        console.error("addinventoryitem error" + error)
+    }
+}
+
+module.exports = {
+    getClassifications, 
+    getInventoryByClassificationId, 
+    getInventoryById, 
+    addInventoryItem, 
+    addClassification, 
+    checkExistingClassification}

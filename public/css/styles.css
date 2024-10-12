@@ -287,6 +287,83 @@
     margin: 1px; 
     display: flex;  
   }
+  /***********Account**************/
+  .login, .register, .new-inventory, .addClassification{
+    background-color: rgb(53, 53, 53);
+    padding: 10px;    
+    margin: 0 auto;   
+    margin-top: 15px;
+    width: 355px;
+    border-radius: 5px;
+    color: aliceblue; 
+  }
+
+  input{
+    border: 0;
+    outline: none;    
+  }
+
+  .login label, .register label, fieldset label, legend i{
+    font-family: "SUSE", sans-serif;
+    font-size: 1.5rem;
+  } 
+
+  fieldset{
+    width: 160px;
+    margin: 0 auto;
+  }
+  
+  
+  #pswdBtn, span{
+    margin-top: 10px;
+    font-family: "SUSE", sans-serif;
+    font-size: 1rem;
+  }
+
+  span a{
+    color: aliceblue; 
+    font-size: 1rem;
+    margin-left: 10px;
+  }
+
+  .field{
+    border: solid 1px #ccc;
+    padding: 10px;
+    width: 280px;
+  }
+
+  button{
+    width: 200px;    
+    margin-top: 20px;
+    font-family: "Handjet", sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    background-color: #007BFF;
+  }
+
+  .center-content{
+    text-align: center;
+  }
+
+  .field:focus{
+    border-color:cadetblue;
+  }
+
+  fieldset label, .addClassification p{
+    font-size: 1.5rem;
+  }
+
+  #classification_id{
+    width: 280px;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .notice{
+    color: red;
+    list-style: none;
+
+  }
 
   /***********Errors**************/
   .doh{
@@ -609,6 +686,82 @@
     margin: 1px; 
     display: flex;  
   }
+/***********Account**************/
+  .login, .register, .addClassification, .new-inventory{
+    background-color: rgb(53, 53, 53);
+    padding: 10px;    
+    margin: 0 auto;   
+    margin-top: 15px;
+    width: 355px;
+    border-radius: 5px;
+    color: aliceblue; 
+  }
+
+  input{
+    border: 0;
+    outline: none;    
+  }
+
+  .login label, .register label, fieldset label, legend i{
+    font-family: "SUSE", sans-serif;
+    font-size: 1rem;
+  } 
+
+  fieldset{
+    width: 160px;
+    margin: 0 auto;
+  }
+  
+  #pswdBtn, span{
+    margin-top: 10px;
+    font-family: "SUSE", sans-serif;
+    font-size: 1rem;
+  }
+
+  span a{
+    color: aliceblue; 
+    font-size: 1rem;
+    margin-left: 10px;
+  }
+
+  .field{
+    border: solid 1px #ccc;
+    padding: 10px;
+    width: 280px;
+  }
+
+  button{
+    width: 200px;    
+    margin-top: 20px;
+    font-family: "Handjet", sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+    background-color: #007BFF;
+  }
+
+  .center-content{
+    text-align: center;
+  }
+
+  .field:focus{
+    border-color:cadetblue;
+  }
+
+  fieldset label, .addClassification p{
+    font-size: 1.5rem;
+  }
+
+  #classification_id{
+    width: 280px;
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .notice{
+    color: red;
+    list-style: none;
+
+  }
 
 /***********Errors**************/
 .doh{
@@ -877,63 +1030,139 @@
       padding-left: 50px;
     }
 
-/***********Footer*****************/
-   /***********Errors**************/
-.doh{
-  width: 100%;
-}
+    /***********Account**************/
+    .login, .register, .addClassification, .new-inventory{
+      background-color: rgb(53, 53, 53);
+      padding: 10px;    
+      margin: 0 auto;   
+      margin-top: 15px;
+      width: 355px;
+      border-radius: 5px;
+      color: aliceblue; 
+    }
 
-.burn{
-  width: 100%;
-}
-/*********Footer***************/
-  footer{
-    padding-top: 10px;
-    margin-top: 10px;    
-  }
+    input{
+      border: 0;
+      outline: none;    
+    }
 
-  footer a{
-    font-size: 1.5rem;
-    color: rgb(53, 53, 53);
-    text-decoration: none;    
-  }
+    .login label, .register label, fieldset label, legend i {
+      font-family: "SUSE", sans-serif;
+      font-size: 1.5rem;
+    } 
 
-  footer #GH{
-    min-width: 130px;
-    height: 40px;
-    color: #fff;
-    padding: 5px 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    outline: none;
-    border: 1px solid #000;
-    color: #000;
-    background: transparent;
-    z-index: 0;
-  }
+    fieldset{
+      width: 160px;
+      margin: 0 auto;
+    }
+    
+    #pswdBtn, span{
+      margin-top: 10px;
+      font-family: "SUSE", sans-serif;
+      font-size: 1rem;
+    }
 
-  #GH:hover:after{
-    top: 0;
-    left: 0;
-  }
+    span a{
+      color: aliceblue; 
+      font-size: 1rem;
+      margin-left: 10px;
+    }
 
-  #GH:after{
-    content: "";
-    width: 100%;
-    z-index: -1;
-    position: absolute;
-    height: 100%;
-    top: 5px;
-    left: 5px;
-    transition: 0.2s;
-    background-color: #3d348b;
-  }
-  footer .copyright{
-    margin-bottom: 0;
-  }
+    .field{
+      border: solid 1px #ccc;
+      padding: 10px;
+      width: 280px;
+    }
+
+    button{
+      width: 200px;    
+      margin-top: 20px;
+      font-family: "Handjet", sans-serif;
+      font-weight: 600;
+      font-size: 2rem;
+      background-color: #007BFF;
+    }
+
+    .center-content{
+      text-align: center;
+    }
+
+    .field:focus{
+      border-color:cadetblue;
+    }
+
+    fieldset label, .addClassification p{
+      font-size: 1.5rem;
+    }
+
+    #classification_id{
+      width: 280px;
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .notice{
+      color: red;
+      list-style: none;
+  
+    }
+
+  /***********Errors**************/
+    .doh{
+      width: 100%;
+    }
+
+    .burn{
+      width: 100%;
+    }
+  /*********Footer***************/
+    footer{
+      padding-top: 10px;
+      margin-top: 10px;    
+    }
+
+    footer a{
+      font-size: 1.5rem;
+      color: rgb(53, 53, 53);
+      text-decoration: none;    
+    }
+
+    footer #GH{
+      min-width: 130px;
+      height: 40px;
+      color: #fff;
+      padding: 5px 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      display: inline-block;
+      outline: none;
+      border: 1px solid #000;
+      color: #000;
+      background: transparent;
+      z-index: 0;
+    }
+
+    #GH:hover:after{
+      top: 0;
+      left: 0;
+    }
+
+    #GH:after{
+      content: "";
+      width: 100%;
+      z-index: -1;
+      position: absolute;
+      height: 100%;
+      top: 5px;
+      left: 5px;
+      transition: 0.2s;
+      background-color: #3d348b;
+    }
+    footer .copyright{
+      margin-bottom: 0;
+    }
 }
 
 

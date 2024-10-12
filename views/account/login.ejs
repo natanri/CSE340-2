@@ -1,21 +1,25 @@
-<!--<div><h1><%- title %></h1>
-    <p><i><%# messages() %></i></p>
-    <%# if(errors) { %>
+<div>
+    <h1><%- title %></h1>
+    <p><i><%- messages() %></i></p>
+    <% if(errors) { %>
         <ul class="notice">
-            <%# errors.array().forEach(error =>{ %> 
-                <li><i><%# error.msg %></i></li>
-            <%# }) %>
+            <% errors.array().forEach(error => { %>
+                <li><i><%= error.msg %></i></li>            
+            <% }) %>
         </ul>
-    <%# } %>
-</div>-->
+        <% } %>
+</div>
+
 <div class="login">
     <form id="loginform" action="/account/login" method="post">
         <fieldset>
             <label for="account_email">Email:</label><br>
-            <input type="email" id="email" name="account_email" required value="<%=locals.account_email%>"><br>
+            <input type="email" id="email" class="field" name="account_email" required value="<%=locals.account_email%>"><br>
             <label for="account_password">Password:</label><br>
-            <input type="password" id="pswd" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>
-            <button type="submit">Login</button><br>
+            <input type="password" id="pswd" class="field" name="account_password" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"><br>
+            <p class="center-content">
+                <button type="submit" class="btn btn-grey">Login</button><br>
+            </p>            
         </fieldset>
     </form>
     <span>No Account? <a href="/account/register">Sign-Up</a></span>
