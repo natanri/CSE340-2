@@ -39,7 +39,7 @@
     font-weight: 600;
     }
 
-  h2, p, li, a{
+  h2, p, li, a, #inventoryDisplay{
     font-family: "SUSE", sans-serif;
   }
 
@@ -288,7 +288,7 @@
     display: flex;  
   }
   /***********Account**************/
-  .login, .register, .new-inventory, .addClassification{
+  .login, .register, .new-inventory, .addClassification, .edit-inventory{
     background-color: rgb(53, 53, 53);
     padding: 10px;    
     margin: 0 auto;   
@@ -453,7 +453,7 @@
     font-weight: 600;
   }
 
-  h2, p, li, a, h4{
+  h2, p, li, a, h4, #inventoryDisplay {
     font-family: "SUSE", sans-serif;
     font-size: 1.5rem;
   }
@@ -836,7 +836,7 @@
       font-weight: 600;
       }
     
-    h2, p, li, a{
+    h2, p, li, a, #inventoryDisplay{
       font-family: "SUSE", sans-serif;
     }
     /***********Header***********/

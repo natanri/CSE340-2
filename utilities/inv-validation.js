@@ -63,9 +63,80 @@ inv_validate.checkInventoryData = async (req, res, next) => {
     next(); // No hay errores, continuar con el siguiente middleware
 };
 
+/************************************************* 
+ * Validate data and errors will be directed back to the edit view
+***************************************************/
+inv_validate.checkUpdateData = async (req, res, next) => {
+    // Ejecutar las validaciones para cada campo que necesitas
+    await Promise.all([
+        //add inv_id validation
+        body("inv_id")
+            .trim()
+            .isInt()
+            .notEmpty()
+            .withMessage("Inventory ID is required")
+            .run(req),
+
+        body("inv_make")
+            .trim()
+            .notEmpty()
+            .withMessage("Make is required")
+            .run(req),
+
+        body("inv_model")
+            .trim()
+            .notEmpty()
+            .withMessage("Model is required")
+            .run(req),
+
+        body("inv_year")
+            .isNumeric()
+            .withMessage("Year must be a number")
+            .run(req),
+
+        body("inv_price")
+            .isInt({ gt: 0 })
+            .withMessage("Price must be a positive number")
+            .run(req),
+
+        
+    ]);
+
+    // Gather validation errors
+    let errors = validationResult(req);
+
+    // If errors, render form with errors messages
+    if (!errors.isEmpty()) {
+        let nav = await utilities.getNav();
+        let classificationSelect = await utilities.buildClassificationList(req.body.classification_id);        
+
+        res.render('inventory/edit-inventory', {
+            title: `Edit ${req.body.inv_make} ${req.body.inv_model}`,
+            errors: errors.array(),             
+            nav,
+            classificationSelect,
+            errors,
+            // Other information to pass if needed
+            inv_id: req.body.inv_id,//Pass the inv_id to the view
+            inv_make: req.body.inv_make,
+            inv_model: req.body.inv_model,
+            inv_year: req.body.inv_year,
+            inv_description: req.body.inv_description,
+            inv_image: req.body.inv_image,
+            inv_thumbnail: req.body.inv_thumbnail,
+            inv_price: req.body.inv_price,
+            inv_miles: req.body.inv_miles,
+            inv_color: req.body.inv_color,
+            classification_id: req.body.classification_id
+        });
+        return;
+    }
+    next(); // No hay errores, continuar con el siguiente middleware
+};
+
 /*******************************************
  * Check data and return errors or continue to edit inventory
- *********************************************/
+ *********************************************
 inv_validate.checkUpDateData = async (req, res, next) =>{
     let list = await utilities.buildClassificationList()
     const {
@@ -146,5 +217,7 @@ inv_validate.checkClassificationData = async (req, res, next) => {
     }
     next();
 };
+
+
 
 module.exports = inv_validate

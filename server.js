@@ -16,10 +16,16 @@ const utilities = require('./utilities')
 const session = require("express-session")
 const pool = require('./database')
 const bodyParser = require("body-parser")
+const cookieParser = require("cookie-parser")
+const flash = require('connect-flash')
 
 /***********************************
  * Middleware
  **********************************/
+//Activity 5, cookies parser
+app.use(cookieParser())
+
+//Session config
 app.use(session({
   store: new (require('connect-pg-simple')(session))({
     createTableIfMissing: true,
@@ -36,12 +42,17 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 
 //Express Messages Middelware
+
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
 
+
+
+//Apply middleware, activity 5
+app.use(utilities.checkJWTToken)
 
 /* *************************
  * View Engine and Templates
@@ -106,10 +117,7 @@ app.use(async(err, req, res, next) =>{
 })
 
 
-//Index route
-app.get('/', function(req, res){
-  res.render('index',{title: "Home"})
-})
+
 
 
 /* ***********************

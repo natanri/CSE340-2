@@ -1,0 +1,9 @@
+<h1><%= title %></h1>
+<p>Are you sure you want to delete <%= itemName %>?</p>
+
+<form action="/inv/delete" method="POST">
+    <input type="hidden" name="inv_id" value="<%= inv_id %>">
+    <button type="submit">Yes, Delete</button>
+</form>
+
+<a href="/inv">Cancel</a>

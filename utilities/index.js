@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 const Util = {}
 
 /****************************
@@ -34,12 +36,12 @@ Util.buildClassificationList = async function(classification_id = null){
         list += `<option value=${row.classification_id}`
 
         if(classification_id != null && row.classification_id == classification_id){
-            list += "selected"
-            isSelected=""}
+            list += ` selected`
+        }
         list += `>${row.classification_name}</option>`
-        })
-        list += "</select>"
-        return list    
+    })
+    list += "</select>"
+    return list    
 }
 
 /**************************************
@@ -102,6 +104,57 @@ Util.buildInventoryDetailGrid = async function(data){
         grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
     }
     return grid
+}
+
+
+/***********************************
+ * Middleware function to check token validity
+ ***********************************/
+Util.checkJWTToken = (req, res, next) => {
+    if(req.cookies.jwt){
+        jwt.verify(
+            req.cookies.jwt,
+            process.env.ACCESS_TOKEN_SECRET,(err, accountData) => {
+                if(err){
+                    req.flash("Please log in")
+                    res.clearCookie("jwt")
+                    return res.redirect("/account/login")
+                }
+                console.log("verified accountData", accountData)
+                res.locals.accountData = accountData
+                res.locals.loggedin = true
+                next()
+            }
+        )
+    } else{
+        console.log("No jwt token found")
+        res.locals.loggedin = false
+        next()
+    }
+}
+
+/***********************************
+ * Check login, middleware
+ ***********************************/
+Util.checkLogin = (req, res, next) => {
+    const token = req.cookies.jwt
+
+    if(!token){
+        req.flash("notice", "Please log in.")
+        return res.redirect("/account/login")
+    }
+
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, userData) => {
+        if(err){
+            req.flash("notice", "Invalid or expired session. Please log in again.")
+            return res.redirect("/account/login")
+        }
+
+        res.locals.loggedin = true
+        res.locals.userData = userData
+        next()
+    })
+    
 }
 
 /********************************
