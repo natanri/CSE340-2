@@ -7,7 +7,7 @@ const validate = require('../utilities/inv-validation')
 
 
 //Route to build management view
-router.get('/management', invController.buildManagement)
+router.get('/management', utilities.checkAdminEmployee, invController.buildManagement)
 
 //Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId)
@@ -17,19 +17,19 @@ router.get("/detail/:inv_id", invController.buildByInventoryDetail)
 router.get('/getInventory/:classification_id', utilities.handleErrors(invController.getInventoryJSON))
 
 //Route to add classification
-router.get('/add-classification', utilities.handleErrors(invController.buildAddClassification))
+router.get('/add-classification', utilities.checkAdminEmployee, utilities.handleErrors(invController.buildAddClassification))
 
 //Define rooute
 router.get('/inv', invController.addInventory)
 
 //Route shows to add inventory item
-router.get('/add-inventory', utilities.handleErrors(invController.buildAddInventory))
+router.get('/add-inventory',utilities.checkAdminEmployee, utilities.checkAdminEmployee, utilities.handleErrors(invController.buildAddInventory))
 
 //route to process the edit view
-router.get('/edit/:inv_id', utilities.handleErrors(invController.buildEditInventoryView))
+router.get('/edit/:inv_id', utilities.checkAdminEmployee, utilities.handleErrors(invController.buildEditInventoryView))
 
 //Route to shows confirmation view to delete
-router.get("/delete/:inv_id", async (req, res, next) => {
+router.get("/delete/:inv_id", utilities.checkAdminEmployee, async (req, res, next) => {
     try {
         await invController.buildDeleteConfirmation(req, res)
     }catch(error){
@@ -38,24 +38,25 @@ router.get("/delete/:inv_id", async (req, res, next) => {
 })
 
 //Router to process the new clasification
-router.post('/add-classification', 
+router.post('/add-classification', utilities.checkAdminEmployee,
     validate.Classification(), 
     validate.checkClassificationData,
     invController.addClassification)
 
 //Route to process the addition to new car
-router.post('/add-inventory', validate.checkInventoryData, invController.addInventory)
+router.post('/add-inventory', utilities.checkAdminEmployee, validate.checkInventoryData, invController.addInventory)
 
 //Route to handle the incoming request activity 5
-router.post('/update/', utilities.handleErrors(invController.updateInventory))
+router.post('/update/',utilities.checkAdminEmployee, utilities.handleErrors(invController.updateInventory))
 
 //Route to update inventory
-router.post('/inv/update',     
+router.post('/inv/update',
+    utilities.checkAdminEmployee,
     validate.checkUpdateData,
     invController.updateInventory)
 
 //Rout to delete vehicle
-router.post("/delete/", async (req, res, next) =>{
+router.post("/delete/", utilities.checkAdminEmployee, async (req, res, next) =>{
     try{
         await invController.deleteInventoryItem(req, res)
     }catch(error){

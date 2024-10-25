@@ -288,7 +288,7 @@
     display: flex;  
   }
   /***********Account**************/
-  .login, .register, .new-inventory, .addClassification, .edit-inventory{
+  .login, .register, .new-inventory, .addClassification, .edit-inventory, .edit-info, .edit-password{
     background-color: rgb(53, 53, 53);
     padding: 10px;    
     margin: 0 auto;   
@@ -303,7 +303,7 @@
     outline: none;    
   }
 
-  .login label, .register label, fieldset label, legend i{
+  .login label, .register label, fieldset label, legend i, .edit-info, .edit-password{
     font-family: "SUSE", sans-serif;
     font-size: 1.5rem;
   } 

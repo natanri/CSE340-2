@@ -1,0 +1,49 @@
+
+<h1><%- title %></h1>
+    <p><i><%- messages() %></i></p>
+    <% if (errors) { %>
+        <ul class="notice">
+          <% errors.forEach(error => { %>
+            <li><i><%= error.msg %></i></li>
+          <% }) %>
+        </ul>
+      <% } %>
+
+<div class="edit-info">
+    <h2>Update Account</h2>
+
+    <form action="/account/updateAccount/<%= account_id %>" method="post">
+        <input type="hidden" name="accountId" value="<%= account_id %>">
+        <p>Account ID: <%= account_id %></p>
+
+        <label for="account_firstname">First Name:</label><br>
+        <input type="text" id="firstname" class="field" name="account_firstname" required value="<%= locals.account_firstname || '' %>"><br>
+
+        <label for="account_lastname">Last Name:</label><br>
+        <input type="text" id="lastname" class="field" name="account_lastname" required value="<%= locals.account_lastname || '' %>"><br>
+        
+        <label for="account_email">Email:</label>
+        <input type="email" id="email" class="field" name="account_email" required value="<%= locals.account_email || '' %>">
+        <button type="submit">Update Account</button>
+    </form>    
+</div>
+
+<div class="edit-password">
+    <h2>Change Password</h2>
+    <span>Password must be at least 12 characters long, contain 1 uppercase letter, 1 number, and 1 special character.</span><br>
+    <form action="/account/changePassword/<%= account_id %>" method="post">
+        <input type="hidden" name="account_id" value="<%= account_id %>">
+        
+
+        <label for="account_password">New Password:</label><br>
+        <input type="password" id="account_password" name="account_password" minlength="12" class="field"
+        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required><br>
+
+        <label for="confirm_password">Confirm New Password:</label>
+        <input type="password" id="confirm_password" class="field" name="confirm_password" minlength="12" required>
+
+        <button type="submit">Change Password</button>
+        
+    </form>
+</div>
+

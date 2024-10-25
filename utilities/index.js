@@ -157,6 +157,31 @@ Util.checkLogin = (req, res, next) => {
     
 }
 
+Util.checkAdminEmployee = async function(req, res, next) {
+    try{
+        const token = req.cookies.jwt
+
+        if (!token){
+            req.flash("notice", " Please log in in to access this page.")
+            return res.redirect("/account/login")
+        }
+
+        const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+
+        if(decodedToken.account_type === "Employee" || decodedToken.account_type === "Admin"){
+            req.account = decodedToken
+            next()
+        }else{
+            req.flash("notice", "You do not have permission to access this page.")
+            return res.redirect('/account/login')
+        }
+    }catch(error){
+        console.error('Error checking account type', error)
+        req.flash('notice', 'Something went wrong. Please log in again')
+        return res.redirect('/account/login')
+    }
+}
+
 /********************************
  * Middleware for handling errors
  * wrap other function in this for

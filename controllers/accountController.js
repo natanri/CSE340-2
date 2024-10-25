@@ -160,27 +160,127 @@ async function accountLogin(req, res) {
   }
   
 
-
+/************************************
+ * Account management modify to handle view if the user has permission to modify 
+ *  the account. If the user does not have permission, redirect to the account management page.
+ **************************************/
 async function accountManagement(req, res){
-    let nav = await utilities.getNav() 
-    //console.log("existing accountManagement") 
-    //console.log("res.locals.accountData:", res.locals.accountData);
-    //const accountData = res.locals.accountData
+    let nav = await utilities.getNav()     
+    const accountData = res.locals.accountData
       
     res.render("account/accountManagement", {
         title: "Account Management",
         nav,
         errors: null,
-        //accountData
-        
+        account_firstname: accountData.account_firstname,
+        account_type: accountData.account_type,
+        account_id: accountData.account_id,        
     })
 }
 
+/********************************
+ * Build updateAccount function
+ **********************************/
+
+async function buildUpdateAccount(req, res,){
+  let nav = await utilities.getNav()
+  const accountId = req.params.accountId
+
+  console.log('Account ID in buildUpdateAccount:', accountId)
+
+  try{
+    const accountData = await accountModel.getAccountById(accountId)
+
+    if(!accountData){
+      req.flash("notice", "Account not found.")
+      return res.status(404).redirect('/account')
+    }
+    res.render('account/updateAccount', {
+      title: 'Update Account Information',
+      nav,
+      account_id: accountData.account_id,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
+      errors: null
+    })
+  }catch(error){
+    req.flash('notice', 'Error retrieving account data.')
+    res.status(500).redirect('/account')
+  } 
+}
+
+/*****************************************
+ * Update account 
+ ******************************************/
+async function updateAccount(req, res){
+  let nav = await utilities.getNav()
+  const { account_firstname, account_lastname, account_email } = req.body
+  const accountId = req.body.accountId
+
+  console.log("Updating Account ID:", accountId);
+  if(!accountId){
+    return res.status(400).send("Account ID is missing.")
+  }
+
+  try{
+    await accountModel.updateAccount({
+      account_id: accountId,
+      account_firstname, 
+      account_lastname, 
+      account_email
+    })
+
+  req.flash("notice", "Account information updated successfully.")
+  return res.redirect('/account/')
+  } catch(error){
+    req.flash('notice', 'failed to update account information.')
+    return res.status(500).render('account/updateAccount', {
+      title: 'Update Account Information',
+      nav,
+      account_firstname,
+      account_lastname,
+      account_email,
+      errors: null
+    })
+  }
+}
+
+async function changePassword(req, res){
+  let nav = await utilities.getNav()
+  const {account_id, account_password } = req.body
+
+  try{
+    const accountData = await accountModel.getAccountById(account_id)
+    if(!accountData) {
+      req.flash('notice', 'Account not found.')
+      return res.status(404).redirect('/account')
+    }
+
+    const hashedPassword = await bcrypt.hash(account_password, 10)
+    const result = await accountModel.updatePassword(account_id, hashedPassword)
+
+    if(result) {
+      req.flash('notice', 'Password updated successfully.')
+      res.redirect('/account/')
+    }
+  }catch(error) {
+    req.flash('notice', 'Error updating password.')
+    res.status(500).render('/account/updateAccount', {
+      title: 'Update Account Information',
+      nav,
+      errors: null
+    })
+  }
+}
 
 
 module.exports = {buildLogin, 
     buildRegister, 
     registerAccount, 
     accountLogin, 
-    accountManagement
+    accountManagement,
+    buildUpdateAccount,
+    updateAccount,
+    changePassword
 }
